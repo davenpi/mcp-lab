@@ -19,67 +19,53 @@ server agent and host LLM.
 
 [Discussion that sparked idea](https://github.com/jlowin/fastmcp/discussions/591)
 
-## [pain] Auth
+## [problem] Auth
 
 - Make auth super simple. Every server that wants to protect resources needs to implement
 auth in a spec compliant way. It's hairy.
 
-## [pattern] Dynamic Tool Surface [fastmcp-issue](https://github.com/jlowin/fastmcp/issues/572)
+## [pattern] Dynamic Tools [fastmcp-issue](https://github.com/jlowin/fastmcp/issues/572)
 
 **The Core Problem**: 
-Right now, everyone who connects to a FastMCP server sees the exact same tools. But users want different people to see different tools from the same server.
+Right now, everyone who connects to a FastMCP server sees the exact same tools. But users want different people
+to see different tools from the same server.
 
-**The Use Case Evolution**:
+**Explaining the GH issue**:
 @guidodecaso's Example:
 - Company has one server that connects to many different business systems
 - When Person A connects, they see tools for "Customer Database" and "Email System"
 - When Person B connects, they see tools for "Analytics Dashboard" and "Admin Panel"
 - Same server, but it figures out who you are and shows you only your relevant tools
+- @orhanrauf Adds Validation:
+"We have exactly this use case too!"
+Also wants to intercept and add logic before tools run
 
 **The Technical Challenge**:
 - Server needs to identify the user (through some kind of credentials)
 - Server needs to fetch the right tools for that specific user (from databases, other systems, etc.)
 - Server needs to route tool calls to the right backend systems
-- @orhanrauf Adds Validation:
-"We have exactly this use case too!"
-Also wants to intercept and add logic before tools run
-
-**Why This Matters**:
-This is moving from "one-size-fits-all servers" to "personalized, contextual tool serving." Think of it like:
-> Old way: Everyone sees the same restaurant menu
-
-> New way: Menu changes based on who you are, your dietary restrictions, what's available today
-
-**The Big Picture**:
-This suggests MCP servers are evolving from simple tool hosts to intelligent routing platforms that dynamically serve contextual capabilities based on user identity and available backend systems.
-It's really about personalization and dynamic capability serving.
 
 
-## [vision] The JARVIS Architecture: AI Agents + Dynamic Tool Serving
+## [problem] Portable AI context
 
-**The Core Vision**: 
-Move from "chatbots with hardcoded tools" to "intelligent assistants that dynamically discover and serve contextual capabilities" - essentially building JARVIS from Iron Man.
+**The friction**: Every AI conversation starts from scratch. You lose valuable insights, have to re-explain preferences, and get locked into specific providers because switching means losing all your accumulated context.
 
-**The JARVIS Pattern**:
-- **Context-aware tool serving**: Different tools appear based on who you are, where you are, what you're doing
-- **Seamless capability discovery**: "JARVIS, help me with the suit" → gets suit diagnostic tools automatically  
-- **Removes cognitive overhead**: User focuses on intent, system figures out the right tools
-- **Adaptive intelligence**: Same server, completely different experience per user/context
+**Examples of lost context**:
+- Health routines and how to adapt workouts based on wearable data
+- Code project patterns that work across different AI coding tools
+- Fashion/relationship advice that took multiple conversations to refine
+- Any principle or template you've developed through AI interaction
 
-**Business Opportunities Unlocked**:
-1. **AI-Native Enterprise Integration**: One server that gives every employee personalized tool access
-2. **Multi-tenant AI Tooling Platforms**: "Shopify for AI Tools" - plug in your systems, get instant AI integration
-3. **Smart Proxy/Gateway Services**: Replace API management with semantic tool serving
-4. **Personalized AI Infrastructure-as-a-Service**: "ChatGPT for Your Company's Tools"
+**Current workaround**: Copy-paste artifacts to Notion, but it's manual and hard to apply to new conversations.
 
-**Beyond Current Tech**:
-- **Emergent tool discovery**: AI agents combine tools in ways humans never imagined
-- **Collective intelligence networks**: Assistants learn from other users while protecting privacy
-- **Adaptive reality systems**: Physical and digital environments reshape based on context
-- **Reality-code fusion**: Voice commands control software, robots, and connected devices seamlessly
+**Potential solution**: Personal context bank as MCP server
+- Dynamic context: Oura data, calendar, current projects (real-time)
+- Persistent knowledge: Principles, templates, conversation artifacts you want to reuse
+- Tools like `recall_insights(topic)`, `store_principle()`, `get_template()`
 
-**Strategic Insight**: 
-While everyone builds the "brain" of AI agents (LLMs, reasoning), there's huge opportunity in building the "nervous system" - how agents sense and interact with the world. MCP expertise + agent familiarity = rare and valuable skillset.
+**Open questions**: 
+- What's the right form factor for maintaining this context bank?
+- How do you make it easy to use without becoming another system to manage?
+- What's the minimum version I'd use?
 
-**The Ultimate Goal**: 
-Computing that's invisible, contextual, and infinitely capable. You think about what you want to accomplish, and the right combination of digital and physical tools appears automatically.
+**Goal**: Make your accumulated AI wisdom portable across providers and persistent across time.

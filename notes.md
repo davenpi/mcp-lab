@@ -52,7 +52,8 @@ Also wants to intercept and add logic before tools run
 
 **Examples of lost context**:
 - Health routines and how to adapt workouts based on wearable data
-- Code project patterns that work across different AI coding tools
+- Code is tied up in Cursor. After I run out of completions I'm paying per request. Still have a bunch of other AI I could use from other
+subscriptions.
 - Fashion/relationship advice that took multiple conversations to refine
 - Any principle or template you've developed through AI interaction
 

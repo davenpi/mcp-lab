@@ -4,18 +4,14 @@ The goal is to build an MCP server that can get my sleep data from my Oura Ring.
 Oura API: https://cloud.ouraring.com/v2/docs
 """
 
+import os
 from datetime import date
-from pathlib import Path
 from typing import Annotated
 
 import httpx
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from fastmcp import FastMCP
 from pydantic import Field
-
-# Load env vars
-script_dir = Path(__file__).parent
-config = dotenv_values(".env")
 
 # FastMCP server
 mcp = FastMCP(
@@ -59,11 +55,11 @@ def get_daily_sleep(
         "end_date": end_date.isoformat() if end_date else start_date.isoformat(),
     }
     url = "https://api.ouraring.com/v2/usercollection/daily_sleep"
-    headers = {"Authorization": f"Bearer {config['OURA_API_KEY']}"}
-
+    headers = {"Authorization": f"Bearer {os.getenv('OURA_API_KEY')}"}
     response = httpx.get(url, headers=headers, params=params)
     return response.json()
 
 
 if __name__ == "__main__":
+    load_dotenv()
     mcp.run()

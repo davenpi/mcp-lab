@@ -1,3 +1,6 @@
+## [nit] Need completions
+
+Annoying to type out requests. "Can you use this tool to do this?". Just want to "/" and have options appear.
 
 ## [pattern] Server-side agents
 **Problem**: Current MCP servers expose dozens of tools. Host LLMs get overwhelmed trying 

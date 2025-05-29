@@ -1,4 +1,5 @@
 ## Contents
 
-- [Notes and ideas](./notes.md)
-- [Servers](./microservers/)
+- [Ideas](./ideas.md)
+- [Notes on the spec](./spec_analysis.md)
+- [Building servers](./servers/)

@@ -1,3 +1,30 @@
+## [nit] Batching semantics
+
+`export type JSONRPCBatchRequest = (JSONRPCRequest | JSONRPCNotification)[];`
+Notification is not a request. Understand we can batch notifications with requests.
+
+
+## [nit] Semantic protocol versions
+Currently using dates
+
+## [nit] Metadata should be a sibling to params in spec.
+
+Spec says
+
+```typescript
+export interface Request {
+  method: string;
+  params?: {
+    _meta?: {
+      progressToken?: ProgressToken;
+    };
+    [key: string]: unknown;
+  };
+}
+```
+
+Annoying! Especially in Python. Can't just say `Request.metadata`. Is this standard?
+
 ## [nit] Need completions
 
 Annoying to type out requests. "Can you use this tool to do this?". Just want to "/" and have options appear.

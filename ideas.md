@@ -1,3 +1,16 @@
+## JSON RPC Paginated request
+
+Now spec has 
+
+```typescript
+export interface JSONRPCRequest extends Request {
+  jsonrpc: typeof JSONRPC_VERSION;
+  id: RequestId;
+}
+```
+
+Does this account for `PaginatedRequest` types? Need to study this. 
+
 ## [nit] Batching semantics
 
 `export type JSONRPCBatchRequest = (JSONRPCRequest | JSONRPCNotification)[];`
@@ -24,6 +37,7 @@ export interface Request {
 ```
 
 Annoying! Especially in Python. Can't just say `Request.metadata`. Is this standard?
+Also what if we add more metadata later?
 
 ## [nit] Need completions
 

@@ -1,8 +1,59 @@
+## Why is it `Annotations` and not `Annotation`?
+
+```typescript
+export interface Annotations {
+  /**
+   * Describes who the intended customer of this object or data is.
+   *
+   * It can include multiple entries to indicate content useful for multiple audiences (e.g., `["user", "assistant"]`).
+   */
+  audience?: Role[];
+
+  /**
+   * Describes how important this data is for operating the server.
+   *
+   * A value of 1 means "most important," and indicates that the data is
+   * effectively required, while 0 means "least important," and indicates that
+   * the data is entirely optional.
+   *
+   * @TJS-type number
+   * @minimum 0
+   * @maximum 1
+   */
+  priority?: number;
+}
+```
+
+## Session code may simplify a lot
+
+May be able to get rid of `RequestResponder` entirely. No more nested context.
+Just register handlers and then
+```python
+async def handle_message(self, raw_message: dict[str, Any]) -> dict[str, Any] | None:
+    jsonrpc_msg = JSONRPCRequest.model_validate(raw_message)
+    
+    # Simple cancellation - one scope per request
+    with anyio.CancelScope() as scope:
+        self.in_flight[jsonrpc_msg.id] = scope
+        
+        try:
+            request_cls = self.request_types[jsonrpc_msg.method]
+            handler = self.handlers[jsonrpc_msg.method]
+            
+            request = jsonrpc_msg.to_request(request_cls)
+            result = await handler(request)  # Handler just returns result
+            
+            # Session automatically sends response - no way to send twice!
+            if result:
+                return JSONRPCResponse.from_result(result, jsonrpc_msg.id).to_wire()
+                
+        finally:
+            self.in_flight.pop(jsonrpc_msg.id, None)
+```
+
 ## Spec JSON RPC for paginated request
 
 Do we need to handle paginated requests too?
-
-
 
 ## Arguments about non DRY `from_protocol`
 

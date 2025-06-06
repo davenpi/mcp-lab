@@ -1,3 +1,49 @@
+## Can we come up with a better name than `metadata` in `CreateMessageRequest`?
+
+It creates naming confusion with `_meta` in general requests.
+
+## Confused about Prompt type vs PromptMessage
+
+```typescript
+/**
+ * A prompt or prompt template that the server offers.
+ */
+export interface Prompt {
+  /**
+   * The name of the prompt or prompt template.
+   */
+  name: string;
+  /**
+   * An optional description of what this prompt provides
+   */
+  description?: string;
+  /**
+   * A list of arguments to use for templating the prompt.
+   */
+  arguments?: PromptArgument[];
+}
+
+export interface PromptMessage {
+  role: Role;
+  content: TextContent | ImageContent | AudioContent | EmbeddedResource;
+}
+```
+## Should `ReadResourceRequest` be paginated? What if the resource is huge?
+
+```typescript
+export interface ReadResourceRequest extends Request {
+  method: "resources/read";
+  params: {
+    /**
+     * The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
+     *
+     * @format uri
+     */
+    uri: string;
+  };
+}
+```
+
 ## Why is it `Annotations` and not `Annotation`?
 
 ```typescript

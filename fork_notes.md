@@ -1,3 +1,5 @@
+## Make `list_changed` vs `listChanged` naming consistent everywhere in spec.
+
 ## Can we come up with a better name than `metadata` in `CreateMessageRequest`?
 
 It creates naming confusion with `_meta` in general requests.

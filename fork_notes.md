@@ -1,3 +1,11 @@
+## [nit] `SetLevelRequest`, `SubscribeRequest`, an `UnsubscribeRequest` responses
+
+Seems they don't expect responses. But it's not obvious what to do.
+
+## [nit] `Annotations` should be `Annotation`.
+
+Plural confuses me
+
 ## Make `list_changed` vs `listChanged` naming consistent everywhere in spec.
 
 ## Can we come up with a better name than `metadata` in `CreateMessageRequest`?

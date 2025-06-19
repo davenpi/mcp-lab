@@ -1,3 +1,7 @@
+## [nit] metadata on `CreateMessageRequest`
+
+confusing. 
+
 ## [nit] `SetLevelRequest`, `SubscribeRequest`, an `UnsubscribeRequest` responses
 
 Seems they don't expect responses. But it's not obvious what to do.

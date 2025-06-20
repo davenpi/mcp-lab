@@ -1,3 +1,8 @@
+## [nit] docs on `Annotations`
+
+"operating the server" is confusing. More like "importance of this data for accomplishing the task"
+or something. 
+
 ## [nit] metadata on `CreateMessageRequest`
 
 confusing. 
